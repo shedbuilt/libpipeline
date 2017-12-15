@@ -1,0 +1,5 @@
+NAME=libpipeline
+VERSION=1.4.2
+REVISION=1
+SRC=http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.4.2.tar.gz
+SRCMD5=d5c80387eb9c9e5d089da2a06e8a6b12
