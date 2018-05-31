@@ -1,9 +1,12 @@
 #!/bin/bash
-if [ "$SHED_BUILD_MODE" == 'bootstrap' ]; then
-    LIBPL_PKGCONFIG_PATH="/tools/lib/pkgconfig"
-else
-    LIBPL_PKGCONFIG_PATH="/usr/lib/pkgconfig"
+declare -A SHED_PKG_LOCAL_OPTIONS=${SHED_PKG_OPTIONS_ASSOC}
+SHED_PKG_LOCAL_PKGCONFIG_PATH='/usr/lib/pkgconfig'
+if [ -n "${SHED_PKG_LOCAL_OPTIONS[bootstrap]}" ]; then
+    SHED_PKG_LOCAL_PKGCONFIG_PATH='/tools/lib/pkgconfig'
 fi
-PKG_CONFIG_PATH="$LIBPL_PKGCONFIG_PATH" ./configure --prefix=/usr || exit 1
-make -j $SHED_NUM_JOBS || exit 1
-make DESTDIR="$SHED_FAKE_ROOT" install || exit 1
+# Configure
+PKG_CONFIG_PATH="$SHED_PKG_LOCAL_PKGCONFIG_PATH" \
+./configure --prefix=/usr &&
+# Build and Install
+make -j $SHED_NUM_JOBS &&
+make DESTDIR="$SHED_FAKE_ROOT" install

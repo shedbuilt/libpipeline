@@ -3,3 +3,5 @@ VERSION=1.5.0
 REVISION=1
 SRC=http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.0.tar.gz
 SRCMD5=b7437a5020190cfa84f09c412db38902
+OPTIONS=bootstrap|release
+DEFAULTS=release
